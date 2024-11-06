@@ -1,4 +1,5 @@
 import PageHeader from "@/components/page-header";
+import Trend from "@/components/trend";
 
 export default function Page() {
   return (
@@ -10,6 +11,14 @@ export default function Page() {
         <hr className="mb-4 border-gray-200 dark:border-gray-800" />
         <div>
           <PageHeader></PageHeader>
+        </div>
+      </div>
+
+      <div>
+        <h2 className="mb-4 text-lg font-mono">Trend</h2>
+        <hr className="mb-4 border-gray-200 dark:border-gray-800" />
+        <div className="flex space-x-4">
+          <Trend type="Income" amount={1000} />
         </div>
       </div>
     </main>
