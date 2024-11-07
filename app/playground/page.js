@@ -17,8 +17,11 @@ export default function Page() {
       <div>
         <h2 className="mb-4 text-lg font-mono">Trend</h2>
         <hr className="mb-4 border-gray-200 dark:border-gray-800" />
-        <div className="flex space-x-4">
+        <div className="flex space-x-8">
           <Trend type="Income" amount={1000} />
+          <Trend type="Expense" amount={1000} />
+          <Trend type="Investment" amount={1000} />
+          <Trend type="Saving" amount={1000} />
         </div>
       </div>
     </main>
