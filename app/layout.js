@@ -1,5 +1,6 @@
 import localFont from "next/font/local";
 import "./globals.css";
+import useServerDarkMode from "@/hooks/use-server-dark-mode";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -18,8 +19,10 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+  const theme = useServerDarkMode();
+  
   return (
-    <html lang="en">
+    <html lang="en" className={theme}>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
