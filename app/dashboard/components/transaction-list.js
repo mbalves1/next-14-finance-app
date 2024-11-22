@@ -1,4 +1,22 @@
 import TransactionItem from "@/components/transaction-item";
+import TransactionSummaryItem from "@/components/transaction-summary-item";
+
+const groupAndSumTransactionByDate = (transactions) => {
+  const grouped = {};
+  for (const transaction of transactions) {
+    const date = transaction.created_at.split('T')[0];
+
+    if (!grouped[date]) {
+      grouped[date] = { transactions: [], amount: 0 };
+    }
+    grouped[date].transactions.push(transaction);
+    const amount = transaction.type === 'Expense' ? -transaction.amount : transaction.amount;
+    grouped[date].amount += amount;
+  }
+
+  return grouped
+}
+
 
 export default async function TransactionList() {
   const response = await fetch(
@@ -6,16 +24,31 @@ export default async function TransactionList() {
   );
 
   const transactions = await response.json();
-  console.log('transactions', transactions);
+  const grouped = groupAndSumTransactionByDate(transactions)
 
-  return (<section className="space-y-4">
-    { transactions.map(transaction => <div key={transaction.id}>
-      <TransactionItem
-        type={transaction.type}
-        category={transaction.category}
-        description={transaction.description}
-        amount={transaction.amount}
-      ></TransactionItem>
-    </div>) }
-  </section>);
+  return (
+    <div className="space-y-8">
+      { Object.entries(grouped)
+        .map(([date, { transactions, amount }]) => {
+          return (
+            <div key={date}>
+              <TransactionSummaryItem date={date} amount={amount} />
+              <hr className="my-4 border-gray-200 dark:border-gray-800"></hr>
+              <section className="space-y-4">
+                { transactions.map(transaction => <div key={transaction.id}>
+                  <TransactionItem
+                    { ...transaction }
+                    // type={transaction.type}
+                    // category={transaction.category}
+                    // description={transaction.description}
+                    // amount={transaction.amount}
+                  ></TransactionItem>
+                </div>) }
+              </section>
+            </div>
+          )
+        })
+      }
+    </div>
+  );
 }
