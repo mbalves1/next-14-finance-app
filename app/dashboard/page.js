@@ -1,5 +1,9 @@
+import TransactionList from "./components/transaction-list";
+
 export default function Page() {
   return (
-    <>Hello from dash</>
+    <>
+      <TransactionList />
+    </>
   )
 }
