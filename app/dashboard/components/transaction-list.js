@@ -20,11 +20,15 @@ const groupAndSumTransactionByDate = (transactions) => {
 
 
 export default async function TransactionList() {
+  const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
   const response = await fetch(
     'http://localhost:3100/transactions'
   );
 
   const transactions = await response.json();
+
+  await delay(3000);
   const grouped = groupAndSumTransactionByDate(transactions)
 
   return (
