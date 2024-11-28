@@ -23,7 +23,7 @@ export default async function TransactionList() {
   const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
   const response = await fetch(
-    'http://localhost:3100/transactions'
+    `${process.env.API_URL}/transactions`
   );
 
   const transactions = await response.json();
