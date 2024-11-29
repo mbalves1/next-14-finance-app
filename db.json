@@ -1,7 +1,7 @@
 {
   "transactions": [
     {
-      "id": 1,
+      "id": "1",
       "amount": 100,
       "type": "Expense",
       "description": "Restaurant",
@@ -9,7 +9,7 @@
       "created_at": "2023-03-15T23:00:00"
     },
     {
-      "id": 2,
+      "id": "2",
       "amount": 159,
       "type": "Expense",
       "description": "Gas",
@@ -17,7 +17,7 @@
       "created_at": "2023-03-15T23:00:00"
     },
     {
-      "id": 3,
+      "id": "3",
       "amount": 500,
       "type": "Income",
       "description": "Salary",
@@ -25,7 +25,7 @@
       "created_at": "2023-03-15T23:00:00"
     },
     {
-      "id": 4,
+      "id": "4",
       "amount": 99,
       "type": "Expense",
       "description": "Rent",
@@ -38,7 +38,7 @@
       "amount": 900,
       "description": "Paying for stuff...",
       "created_at": "2024-01-23T00:00:00",
-      "id": 5
+      "id": "5"
     },
     {
       "type": "Investment",
@@ -46,7 +46,7 @@
       "amount": 10000,
       "description": "For the future",
       "created_at": "2023-11-17T00:00:00",
-      "id": 6
+      "id": "6"
     },
     {
       "type": "Income",
@@ -54,7 +54,7 @@
       "amount": 6771,
       "description": "Paying for stuff...",
       "created_at": "2023-11-17T00:00:00",
-      "id": 7
+      "id": "7"
     },
     {
       "type": "Income",
@@ -62,7 +62,7 @@
       "amount": 343,
       "description": "Paying for stuff...",
       "created_at": "2024-01-23T00:00:00",
-      "id": 8
+      "id": "8"
     },
     {
       "type": "Saving",
@@ -70,7 +70,7 @@
       "amount": 500,
       "description": "Salary",
       "created_at": "2023-11-17T00:00:00",
-      "id": 9
+      "id": "9"
     },
     {
       "type": "Income",
@@ -78,7 +78,7 @@
       "amount": 1,
       "description": "Salary",
       "created_at": "2024-01-23T00:00:00",
-      "id": 10
+      "id": "10"
     },
     {
       "type": "Income",
@@ -86,7 +86,15 @@
       "amount": 1,
       "description": "Salary",
       "created_at": "2024-01-23T00:00:00",
-      "id": 11
+      "id": "11"
+    },
+    {
+      "id": "90ac",
+      "type": "Expense",
+      "category": "Health",
+      "amount": 305,
+      "description": "Jiu jitsu",
+      "created_at": "2024-11-29T00:00:00"
     }
   ],
   "trends": [
