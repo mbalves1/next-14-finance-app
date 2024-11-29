@@ -23,7 +23,12 @@ export default async function TransactionList() {
   const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
   const response = await fetch(
-    `${process.env.API_URL}/transactions`
+    `${process.env.API_URL}/transactions`,
+    {
+      next: {
+        tags: ['transaction-list']
+      }
+    }
   );
 
   const transactions = await response.json();

@@ -9,6 +9,9 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { transactionSchema } from "@/lib/validation";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { purgeTransactionListCache } from "@/lib/actions";
+import FormError from "@/components/form-error";
 
 export default function TransactionForm() {
   const {
@@ -21,7 +24,8 @@ export default function TransactionForm() {
     resolver: zodResolver(transactionSchema),
   });
 
-   const [ isSaving, setSaving ] = useState(false);
+  const router = useRouter();
+  const [ isSaving, setSaving ] = useState(false);
 
   const onSubmit = async (data) => {
     console.log('prcss', process.env.NEXT_PUBLIC_API_URL);
@@ -36,7 +40,9 @@ export default function TransactionForm() {
           ...data,
           created_at: `${data.created_at}T00:00:00`
         })
-      })
+      });
+      await purgeTransactionListCache();
+      router.push('/dashboard');
     } finally {
       setSaving(false);
     }
@@ -49,6 +55,7 @@ export default function TransactionForm() {
         <Select {...register("type")}>
           { types.map(type => <option key={type}>{type}</option>) }
         </Select>
+        <FormError error={errors.type} />
       </div>
 
       <div>
@@ -56,24 +63,25 @@ export default function TransactionForm() {
         <Select {...register("category")}>
           { categories.map(category => <option key={category}>{category}</option>) }
         </Select>
+        <FormError error={errors.category} />
       </div>
 
       <div>
         <Label className="mb-1">Date</Label>
         <Input {...register("created_at")}/>
-        {errors.created_at && <div className="mt-1 text-xs text-red-500">{errors.created_at.message}</div>}
+        <FormError error={errors.created_at} />
       </div>
 
       <div>
         <Label className="mb-1">Amount</Label>
         <Input type="number" {...register("amount")} />
-        {errors.amount && <div className="mt-1 text-xs text-red-500">{errors.amount.message}</div>}
+        <FormError error={errors.amount} />
       </div>
 
       <div className="col-span-1 md:col-span-2">
         <Label className="mb-1">Description</Label>
         <Input {...register("description")}/>
-        {errors.description && <div className="mt-1 text-xs text-red-500">{errors.description.message}</div>}
+        <FormError error={errors.description} />
       </div>
     </div>
 
