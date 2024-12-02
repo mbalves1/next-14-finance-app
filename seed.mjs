@@ -24,9 +24,7 @@ async function seed() {
 
     if (typeBias < 0.80) {
       type = "Expense"
-      category = faker.helpers.arrayElement([
-        categories
-      ])
+      category = faker.helpers.arrayElement(categories)
     } else if (typeBias < 0.90) {
       type = "Income"
     } else {
@@ -60,8 +58,10 @@ async function seed() {
     })
   }
 
-  const {error} = (await supabase).from('transactions')
+  const {error} = await supabase.from('transactions')
     .insert(transactions)
+
+  console.log('transactions', transactions);
 
   if (error) {
     console.error("Error", error);
