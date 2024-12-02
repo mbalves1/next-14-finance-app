@@ -1,8 +1,8 @@
+import { createClient } from '@supabase/supabase-js'
 import dotenv from 'dotenv';
-import { createClient } from './lib/supabase/server';
 import { faker } from '@faker-js/faker';
 
-dotenv.config({ path: 'env.local' })
+dotenv.config({ path: '.env.local' })
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
@@ -18,7 +18,7 @@ async function seed() {
   let transactions = [];
   for (let i = 0; i < 10 ; i++) {
     const created_at = faker.date.past()
-    let type, category;
+    let type, category = null;
 
     const typeBias = Math.random();
 
@@ -59,4 +59,15 @@ async function seed() {
       category
     })
   }
+
+  const {error} = (await supabase).from('transactions')
+    .insert(transactions)
+
+  if (error) {
+    console.error("Error", error);
+  } else {
+    console.log("Data inserte");
+  }
 }
+
+seed().catch(console.error)
