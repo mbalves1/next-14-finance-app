@@ -29,23 +29,23 @@ export default function TransactionForm() {
 
   const onSubmit = async (data) => {
     console.log('prcss', process.env.NEXT_PUBLIC_API_URL);
-    setSaving(true);
-    try {
-      await fetch(`${process.env.NEXT_PUBLIC_API_URL}/transactions`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          ...data,
-          created_at: `${data.created_at}T00:00:00`
-        })
-      });
-      await purgeTransactionListCache();
-      router.push('/dashboard');
-    } finally {
-      setSaving(false);
-    }
+    // setSaving(true);
+    // try {
+    //   await fetch(`${process.env.NEXT_PUBLIC_API_URL}/transactions`, {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify({
+    //       ...data,
+    //       created_at: `${data.created_at}T00:00:00`
+    //     })
+    //   });
+    //   await purgeTransactionListCache();
+    //   router.push('/dashboard');
+    // } finally {
+    //   setSaving(false);
+    // }
   };
 
   return <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
