@@ -38,7 +38,7 @@ export default async function Page({ searchParams }) {
       </section>
 
       <Suspense fallback={<TransactionListFallback />}>
-        <TransactionList />
+        <TransactionList range={range} />
       </Suspense>
     </>
   )
