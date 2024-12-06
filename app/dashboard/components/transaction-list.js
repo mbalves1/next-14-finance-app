@@ -1,22 +1,26 @@
+'use client'
+import Button from "@/components/button";
 import Separator from "@/components/separator";
 import TransactionItem from "@/components/transaction-item";
 import TransactionSummaryItem from "@/components/transaction-summary-item";
-import { createClient } from "@/lib/supabase/server";
+import { fetchTransactions } from "@/lib/actions";
 import { groupAndSumTransactionByDate } from "@/lib/utils";
+import { useState } from "react";
 
-export default async function TransactionList({ range }) {
-
-  const supabase = await createClient();
+export default function TransactionList({ range, initialTransactions }) {
+  const [ transactions, setTransactions ] = useState(initialTransactions);
+  const [ offset, setOffset ] = useState(initialTransactions.length);
   
-  let { data: transactions, error } = await supabase
-  .rpc('fetch_transactions', {
-    // limit_arg, 
-    // offset_arg, 
-    range_arg: range
-  })
-  if (error) throw new Error("We can't fetch transactions");
-
   const grouped = groupAndSumTransactionByDate(transactions)
+
+  const handleClick = async (e) => {
+    const nextTrasactions = await fetchTransactions(range, offset, 10);
+    setOffset(prevValue => prevValue + 10);
+    setTransactions(prevTransactions => [
+      ...prevTransactions,
+      ...nextTrasactions
+    ]);
+  }
 
   return (
     <div className="space-y-8">
@@ -41,6 +45,9 @@ export default async function TransactionList({ range }) {
           )
         })
       }
+      <div className="flex justify-center">
+        <Button variant="ghost" onClick={handleClick}>Load More</Button>
+      </div>
     </div>
   );
 }
