@@ -10,18 +10,16 @@ import { useState } from "react";
 
 export default function TransactionList({ range, initialTransactions }) {
   const [ transactions, setTransactions ] = useState(initialTransactions);
-  const [ offset, setOffset ] = useState(initialTransactions.length);
   const [ buttonHidden, setButtonHidden ] = useState(initialTransactions.length === 0);
   const [ loading, setLoading ] = useState(false);
   const grouped = groupAndSumTransactionByDate(transactions)
 
-  const handleClick = async (e) => {
+  const handleClick = async () => {
     setLoading(true);
     let nextTrasactions = null;
     try {
-      nextTrasactions = await fetchTransactions(range, offset, 10);
+      nextTrasactions = await fetchTransactions(range, transactions.length, 10);
       setButtonHidden(nextTrasactions.length === 0);
-      setOffset(prevValue => prevValue + 10);
       setTransactions(prevTransactions => [
         ...prevTransactions,
         ...nextTrasactions
