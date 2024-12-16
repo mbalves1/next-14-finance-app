@@ -9,9 +9,19 @@ import { ErrorBoundary } from "react-error-boundary";
 import { types } from "@/lib/consts";
 import Range from "./components/range";
 import TransactionListWrapper from "./components/transaction-list-wrapper";
+import { createClient } from "@/lib/supabase/server";
 
 export default async function Page({ searchParams }) {
-  const range = searchParams?.range ?? 'last30days'
+  
+  const resolvedSearchParams = await searchParams; // Resolva antes de usar
+  const range = resolvedSearchParams?.range ?? "last30days";
+
+  const supabase = await createClient();
+  console.log('supabase', await supabase.auth.getUser());
+
+  const { data } = await supabase.auth.getUser()
+
+  console.log('>data>', data)
 
   return (<div className="space-y-8">
       <section className="flex justify-between items-center">

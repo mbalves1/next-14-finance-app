@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
+    "@supabase/auth-helpers-nextjs": "^0.10.0",
     "@supabase/ssr": "^0.5.2",
     "@supabase/supabase-js": "^2.46.2",
     "json-server": "^1.0.0-beta.3",

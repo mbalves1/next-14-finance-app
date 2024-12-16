@@ -61,8 +61,6 @@ async function seed() {
   const {error} = await supabase.from('transactions')
     .insert(transactions)
 
-  console.log('transactions', transactions);
-
   if (error) {
     console.error("Error", error);
   } else {
