@@ -11,7 +11,6 @@ export default async function Trend({ type, range }) {
     });
   if (error) throw new Error("Could not fetch the trend data");
 
-  console.log('data', data);
   const amounts = data[0];
 
   const amount = data ?? 0;

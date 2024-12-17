@@ -9,8 +9,8 @@ export default function DarkModeToggle({ defaultMode = "dark" }) {
   
   return (
     <Button variant="ghost" size="sm" onClick={toggleTheme}>
-      { theme === "light" && <Moon className="w-4 h-4"></Moon> }
-      { theme === "dark" && <Sun className="w-4 h-4"></Sun> }
+      { theme === "light" && <Moon className="w-6 h-6"></Moon> }
+      { theme === "dark" && <Sun className="w-6 h-6"></Sun> }
     </Button>
   )
 }
