@@ -5,6 +5,7 @@ import { createClient } from "@/lib/supabase/server";
 import Button from "./button";
 import { CircleUser, KeyRound } from "lucide-react";
 import { sizes, variants } from "@/lib/variants";
+import SignOutButton from "./sign-out-button";
 
 export default async function PageHeader({className}) {
   // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -24,6 +25,7 @@ export default async function PageHeader({className}) {
             <span>{ user?.email }</span>
           </Button>
         }
+        { user && <SignOutButton/> }
         { !user && <Link href="/login" className={`${variants['ghost']} ${sizes['sm']}`}>
           <KeyRound className="w-6 h-6" />
         </Link> }
