@@ -17,11 +17,8 @@ export default async function Page({ searchParams }) {
   const range = resolvedSearchParams?.range ?? "last30days";
 
   const supabase = await createClient();
-  console.log('supabase', await supabase.auth.getUser());
 
   const { data } = await supabase.auth.getUser()
-
-  console.log('>data>', data)
 
   return (<div className="space-y-8">
       <section className="flex justify-between items-center">
