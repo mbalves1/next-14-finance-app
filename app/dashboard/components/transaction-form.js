@@ -30,13 +30,13 @@ export default function TransactionForm({ initialData }) {
 
   const router = useRouter();
   const [ isSaving, setSaving ] = useState(false);
-  const [ lastError, serLastError ] = useState();
+  const [ lastError, setLastError ] = useState();
   const type = watch("type");
   const editing = Boolean(initialData);
 
   const onSubmit = async (data) => {
     setSaving(true);
-    serLastError();
+    setLastError();
 
     try {
       if (editing) {
@@ -49,7 +49,7 @@ export default function TransactionForm({ initialData }) {
       }
       router.push('/dashboard');
     } catch (error) {
-      serLastError(error)
+      setLastError(error?.message);
     } finally {
       setSaving(false);
     }
@@ -68,7 +68,7 @@ export default function TransactionForm({ initialData }) {
         })}>
           { types.map(type => <option key={type}>{type}</option>) }
         </Select>
-        <FormError error={errors.type} />
+        <FormError error={errors.type?.message} />
       </div>
 
       <div>
@@ -77,25 +77,25 @@ export default function TransactionForm({ initialData }) {
           <option value="">Select a category</option>
           { categories.map(category => <option key={category}>{category}</option>) }
         </Select>
-        <FormError error={errors.category} />
+        <FormError error={errors.category?.message} />
       </div>
 
       <div>
         <Label className="mb-1">Date</Label>
         <Input {...register("created_at")} disabled={editing}/>
-        <FormError error={errors.created_at} />
+        <FormError error={errors.created_at?.message} />
       </div>
 
       <div>
         <Label className="mb-1">Amount</Label>
         <Input type="number" {...register("amount")} />
-        <FormError error={errors.amount} />
+        <FormError error={errors.amount?.message} />
       </div>
 
       <div className="col-span-1 md:col-span-2">
         <Label className="mb-1">Description</Label>
         <Input {...register("description")}/>
-        <FormError error={errors.description} />
+        <FormError error={errors.description?.message} />
       </div>
     </div>
 

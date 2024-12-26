@@ -9,6 +9,6 @@ export default forwardRef(function Input(props, ref) {
   }
   
   return (<>
-    <input ref={ref} {...props} className={`styles[props.type] ?? styles['default'] ${props.className}`}/>
+    <input ref={ref} {...props} className={`${styles[props.type] ?? styles['default']} ${props.className}`}/>
   </>)
 })
